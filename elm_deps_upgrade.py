@@ -5,6 +5,7 @@ import sys
 import json
 import requests
 import struct
+import argparse
 
 def load_all_packages(elm_version):
     payload = requests.get("http://package.elm-lang.org/all-packages?elm-package-version={elm_version}".format(
@@ -23,9 +24,10 @@ def load_versions(package_name):
 
 def load_local_packages(elm_package):
     with open(elm_package) as f:
-        return json.load(f)
+        return json.load(f)['dependencies']
 
 def top_range(field):
+    print(field)
     only_end = field[field.index('v'):]
 
     if '=' in only_end:
@@ -90,11 +92,22 @@ def print_newer_versions(local_deps, remote_deps):
         print('\n'.join(upgrade_suggestions))
 
 
+def main():
+
+    parser = argparse.ArgumentParser(description='Check deps file for possible upgrades')
+
+    parser.add_argument('--elm-version', help='specify your current elm version', default='0.16')
+
+    parser.add_argument('local')
+    args = parser.parse_args()
+
+    local = load_local_packages(args.local)
+    remote = load_all_packages(args.elm_version)
+
+    print_newer_versions(local, remote)
+
+
 
 if __name__ == '__main__':
-
-    if len(sys.argv) > 1:
-        local = load_local_packages(sys.argv[1])
-        remote = load_all_packages('0.16')
-        print_newer_versions(local['dependencies'], remote)
+    main()
 
