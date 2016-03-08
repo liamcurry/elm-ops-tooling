@@ -8,10 +8,29 @@ Sometimes we need to make sure that two different exact-dependencies are the sam
 
 Usage:
 
+- `--exact` flag if you are passing `exact-dependencies.json`
+- `--quiet` flag if you only want the error message
+
 ```bash
 
-python elm-stuff/exact-dependencies.json tests/elm-stuff/exact-dependencies.json
+python elm-stuff/exact-dependencies.json tests/elm-stuff/exact-dependencies.json --exact
 
+```
+
+will output
+
+```bash
+BUILD FAILED due to elm-deps mismatch, errors:
+Package version mismatch for circuithub/elm-list-extra!
+
+../NoRedInk/elm-stuff/exact-dependencies.json had 3.10.0
+../NoRedInk/spec/elm/elm-stuff/exact-dependencies.json had 3.7.1
+```
+
+or
+
+```bash
+python elm_deps_check.py ../NoRedInk/elm-package.json ../NoRedInk/spec/elm/elm-package.json --quiet
 ```
 
 ## elm_deps_upgrade
