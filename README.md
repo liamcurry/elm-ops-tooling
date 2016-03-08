@@ -37,6 +37,10 @@ python elm_deps_check.py ../NoRedInk/elm-package.json ../NoRedInk/spec/elm/elm-p
 
 Sometimes we want to figure out if our elm-package.json contains old deps.
 
+Usage:
+
+- `--elm-version` if you want to specify a different version of Elm. Defaults to 0.16
+
 ```bash
 
 python elm_deps_upgrade.py elm-package.json

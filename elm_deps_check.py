@@ -49,10 +49,10 @@ def have_matching_versions(top_level_file, spec_file, is_exact=False, quiet=True
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser = argparse.ArgumentParser(description='Check deps matching between a parent and a sub')
 
-    parser.add_argument('--quiet', '-q', action='store_true', help='don\'t print anything')
-    parser.add_argument('--exact', '-e', action='store_true', help='these files are exact dependencies')
+    parser.add_argument('--quiet', '-q', action='store_true', help='don\'t print anything', default=False)
+    parser.add_argument('--exact', '-e', action='store_true', help='these files are exact dependencies', default=False)
 
     parser.add_argument('top_level_file')
     parser.add_argument('spec_file')
