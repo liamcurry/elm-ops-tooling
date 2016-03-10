@@ -13,7 +13,7 @@ Usage:
 
 ```bash
 
-python elm-stuff/exact-dependencies.json tests/elm-stuff/exact-dependencies.json --exact
+python elm_deps_check.py elm-stuff/exact-dependencies.json tests/elm-stuff/exact-dependencies.json --exact
 
 ```
 
