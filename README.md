@@ -55,3 +55,23 @@ Majors available for elm-lang/core: [3.0.0]
 Majors available for evancz/elm-html: [4.0.2, 4.0.1, 4.0.0]
 
 ```
+
+## elm_deps_sync
+
+Sometimes we want to sync the deps between two files, such that all the deps in one file are matched in another file
+
+Usage:
+
+- `--dry` will only print the changes to happen, not write them to file
+- `--quiet` will only print the final statement
+
+```bash
+python elm_deps_sync.py elm-package.json spec/elm/elm-package.json
+```
+
+will print
+
+```
+1 packages changed.
+Package mgold/elm-date-format inserted to spec/elm/elm-package.json for the first time at version "1.1.2 <= v < 2.0.0"
+```

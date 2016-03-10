@@ -35,7 +35,7 @@ def sync_versions(top_level_file, spec_file, quiet=False, dry=False):
                 )
 
     if len(messages) > 0:
-        print('{number} files changed.'.format(number=len(messages)))
+        print('{number} packages changed.'.format(number=len(messages)))
 
         if not dry:
             with open(spec_file, 'w') as f:
