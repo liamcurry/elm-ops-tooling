@@ -39,7 +39,7 @@ def sync_versions(top_level_file, spec_file, quiet=False, dry=False):
 
         if not dry:
             with open(spec_file, 'w') as f:
-                f.write(json.dumps(spec))
+                json.dump(spec, f, sort_keys=False, indent=4)
         else:
             print("No changes written.")
 
