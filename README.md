@@ -65,6 +65,7 @@ Usage:
 
 - `--dry` will only print the changes to happen, not write them to file
 - `--quiet` will only print the final statement
+- `--note` will add a `test-dependencies` field to the second file. Useful for tooling
 
 ```bash
 python elm_deps_sync.py elm-package.json spec/elm/elm-package.json
