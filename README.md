@@ -77,3 +77,11 @@ will print
 1 packages changed.
 Package mgold/elm-date-format inserted to spec/elm/elm-package.json for the first time at version "1.1.2 <= v < 2.0.0"
 ```
+
+## with_retry
+
+Sometimes, elm-package flakes out due to connection issues. The simplest solution to this is to wrap the `elm-package install` step with our `with_retry` script, which will rerun 10 times until it succeeds, otherwise fail the build
+
+```
+with_retry.rb elm-package install
+```
