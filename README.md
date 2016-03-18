@@ -85,3 +85,15 @@ Sometimes, elm-package flakes out due to connection issues. The simplest solutio
 ```
 with_retry.rb elm-package install
 ```
+
+
+## elm_self_publish
+
+Sometimes, we want to "install" our packages locally to test them before publishing them remotely.
+
+
+```
+python elm_self_publish.py ../elm-css ../json-to-elm/
+```
+
+will publish elm-css into json-to-elm
