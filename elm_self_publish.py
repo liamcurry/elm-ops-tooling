@@ -25,6 +25,8 @@ def self_publish(package_location, destination=".", quiet=False):
     """
 
     elm_package_file = "{location}/elm-package.json".format(location=package_location)
+    destination_elm_package_file = "{destination}/elm-package.json".format(destination=destination)
+
     exact_deps_file = "{destination}/elm-stuff/exact-dependencies.json".format(
         destination=destination,
         location=package_location
@@ -59,9 +61,12 @@ def self_publish(package_location, destination=".", quiet=False):
         package_info[place] = version
         json.dump(package_info, f, sort_keys=False, indent=4)
 
-    with open(elm_package_file, 'w') as f:
-        elm_package['dependencies'][place] = version
-        json.dump(elm_package, f, sort_keys=False, indent=4)
+    with open(destination_elm_package_file) as f:
+        destination_elm_package = json.load(f)
+
+    with open(destination_elm_package_file, 'w') as f:
+        destination_elm_package['dependencies'][place] = "{version} <= v <= {version}".format(version=version)
+        json.dump(destination_elm_package, f, sort_keys=False, indent=4)
 
 
 def main():
