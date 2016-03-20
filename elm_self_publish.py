@@ -7,6 +7,7 @@ import shutil
 import argparse
 
 def copy_package(location, destination):
+    shutil.rmtree(destination, ignore_errors=True)
     shutil.copytree(location, destination)
 
 def package_name(url):
