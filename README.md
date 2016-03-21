@@ -89,7 +89,7 @@ with_retry.rb elm-package install
 
 ## elm_self_publish
 
-Sometimes, we want to "install" our packages locally to test them before publishing them remotely.
+Sometimes, we want to "install" our packages locally to test them before publishing them remotely. This is designed only with the use case of testing packaged, not using them in production. It doesn't provide any of the guarantees nor support that elm-package does. If you're doing production stuff, elm-package is what you want.
 
 
 ```
