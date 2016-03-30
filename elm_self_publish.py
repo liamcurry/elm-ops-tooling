@@ -4,11 +4,13 @@ from __future__ import print_function
 import sys
 import json
 import shutil
+import os
+import errno
 import argparse
 
-def copy_package(location, destination):
+def copy_package(location, destination, ignorer=None):
     shutil.rmtree(destination, ignore_errors=True)
-    shutil.copytree(location, destination)
+    shutil.copytree(location, destination, ignore=ignorer)
 
 def package_name(url):
     """ get the package name from a github url """
@@ -21,6 +23,24 @@ def package_name(url):
         "user": user
     }
 
+def make_elm_stuff_folder(path):
+    actual_path = '/'.join(path.split('/')[:-1])
+
+    try:
+        os.makedirs(actual_path)
+    except OSError as e:
+        if e.errno == errno.EEXIST and os.path.isdir(actual_path):
+            pass
+        else:
+            raise
+
+def gitignores(path):
+    try:
+        with open(path) as f:
+            return [line.strip() for line in f]
+    except:
+        return []
+
 def self_publish(package_location, destination=".", quiet=False):
     """ package_location should be the local package to install
     """
@@ -32,6 +52,9 @@ def self_publish(package_location, destination=".", quiet=False):
         destination=destination,
         location=package_location
     )
+
+    git_ignore_file = "{location}/.gitignore".format(location=package_location)
+
 
     with open(elm_package_file) as f:
         elm_package = json.load(f)
@@ -48,15 +71,20 @@ def self_publish(package_location, destination=".", quiet=False):
         place=place,
         version=version,
         destination=destination
-    ))
+    ), ignorer=shutil.ignore_patterns(*gitignores(git_ignore_file)))
 
 
-    with open(exact_deps_file) as f:
-        data = f.read()
+    try:
+        with open(exact_deps_file) as f:
+            data = f.read()
+            package_info = {}
+
+            if data:
+                package_info = json.loads(data)
+    except IOError:
         package_info = {}
 
-        if data:
-            package_info = json.loads(data)
+    make_elm_stuff_folder(exact_deps_file)
 
     with open(exact_deps_file, 'w') as f:
         package_info[place] = version
