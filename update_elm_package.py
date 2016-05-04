@@ -13,6 +13,7 @@ KNOWN_MOVES = {
     , 'evancz/virtual-dom': 'elm-lang/virtual-dom'
     , 'evancz/elm-effects' : ''
     , 'evancz/start-app' : ''
+    , 'maxsnew/lazy' : 'elm-lang/lazy'
     }
 
 
@@ -45,7 +46,9 @@ def update_elm_package(root_folder, dry=False):
             else:
                 notes.append('Package {name} renamed to {new_name}'.format(name=package, new_name=new_name))
                 package = new_name
-                version = '1.0.0'
+                version = '1.0.0 <= v <= 1.0.0'
+                upgradable_packages[package] = version
+
             continue
 
         if package not in upgraded_packages:
@@ -91,6 +94,7 @@ def update_elm_package(root_folder, dry=False):
     if errors:
         print('There were errors that need to be handled manually!')
         sys.exit(1)
+
 
 
 
