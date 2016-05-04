@@ -89,11 +89,13 @@ with_retry.rb elm-package install
 
 ## elm_self_publish
 
-Sometimes, we want to "install" our packages locally to test them before publishing them remotely. This is designed only with the use case of testing packaged, not using them in production. It doesn't provide any of the guarantees nor support that elm-package does. If you're doing production stuff, elm-package is what you want.
+Automate upgrading to 0.17! Automate your elm-package and your file upgrades.
 
 
 ```
-python elm_self_publish.py ../elm-css ../json-to-elm/
+python update_elm_package.py ../upgrades/elm-lazy-list
 ```
 
-will publish elm-css into json-to-elm
+will upgrade the package in that directory.
+
+
