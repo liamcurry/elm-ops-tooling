@@ -1,6 +1,16 @@
 # elm-ops-tooling
 Tooling for Elm ops
 
+## update_elm_package
+
+Automate upgrading to 0.17! Automate your elm-package and your file upgrades.
+
+
+```
+python update_elm_package.py ../upgrades/elm-lazy-list
+```
+
+will upgrade the package in that directory.
 
 ## elm_deps_check
 
@@ -99,13 +109,4 @@ python elm_self_publish.py ../elm-css ../json-to-elm/
 will publish elm-css into json-to-elm
 
 
-## update_elm_package
 
-Automate upgrading to 0.17! Automate your elm-package and your file upgrades.
-
-
-```
-python update_elm_package.py ../upgrades/elm-lazy-list
-```
-
-will upgrade the package in that directory.
