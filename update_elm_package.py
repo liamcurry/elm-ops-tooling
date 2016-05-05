@@ -11,7 +11,25 @@ import re
 import os
 import glob
 
-module_pattern = r'module\s+?(\S+)\s*?(.*?)\s+?where'
+module_ident = 'module'
+space_before_module_name = '\\s+'
+module_name = '(\\S+)'
+space_between_name_and_expose = '\\s+?'
+expose = '(.*?)'
+space_between_expose_and_where = '\\s+?'
+where_ident = 'where'
+
+
+module_pattern = ''.join(
+        [ module_ident
+        , space_before_module_name
+        , module_name
+        , space_between_name_and_expose
+        , expose
+        , space_between_expose_and_where
+        , where_ident
+        ]
+        )
 
 KNOWN_MOVES = {
     'evancz/elm-html' : 'elm-lang/html'
@@ -31,15 +49,16 @@ def upgrade_module_syntax(module_name, exposing):
 
     if not exposing:
         exposing = '(..)'
+    #print(exposing)
 
     return 'module {name} exposing {exposing}'.format(name=module_name, exposing=exposing)
 
 
 def replace_module_line(text, replacement):
-    return re.sub(module_pattern, replacement, text, count=1)
+    return re.sub(module_pattern, replacement, text, count=1, flags=re.MULTILINE | re.DOTALL)
 
 def get_module_name_and_exposing(text):
-    matches = re.search(module_pattern, text)
+    matches = re.search(module_pattern, text, flags=re.MULTILINE | re.DOTALL)
 
     if not matches:
         return ('', '')
