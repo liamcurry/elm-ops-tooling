@@ -66,7 +66,7 @@ def get_module_name_and_exposing(text):
     return matches.groups()
 
 def new_packages():
-    r = requests.get("http://159.203.88.24:8000/new-packages")
+    r = requests.get("http://package.elm-lang.org/new-packages")
     return r.json()
 
 def update_elm_package(root_folder, dry=False):
@@ -105,7 +105,7 @@ def update_elm_package(root_folder, dry=False):
         upgradable_packages[package] = version
 
     local = upgradable_packages
-    remote = upgrader.load_all_packages("0.17", "http://159.203.88.24:8000/all-packages?elm-package-version=")
+    remote = upgrader.load_all_packages("0.17", "http://package.elm-lang.org/all-packages?elm-package-version=")
 
 
     upgrade_suggestions = upgrader.find_newer_versions(local, remote)
