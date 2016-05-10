@@ -20,6 +20,8 @@ python update_elm_package.py ../upgrades/elm-lazy-list
 
 will upgrade the package in that directory.
 
+(This script requires Python 3.5.1 or later, which comes pre-installed on some systems as `python3`)
+
 ## elm_deps_check
 
 Sometimes we need to make sure that two different exact-dependencies are the same. This is the case when you have a parent project, and a test project where the parent project dependencies are a sub list of test project.
